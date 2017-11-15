@@ -1,0 +1,41 @@
+---
+title: "Homework4"
+author: "Divya"
+date: "November 14, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+#Q1
+```{r boxplot}
+library(lattice)
+ bwplot(variety ~ yield, data = barley)
+
+```
+#Q2
+```{r maps and data}
+
+library(ggplot2)
+library(maps)
+
+states <- map_data("state") 
+head(states)
+
+# geom_map is provided in support of choropleths
+head(USArrests) # data set in maps package
+crimes <- data.frame(state = tolower(rownames(USArrests)), USArrests) # Change row lables to data for use in map parameter of geom_map
+ggplot(crimes, aes(map_id = state)) +
+    geom_map(aes(fill = UrbanPop), map = states) + # map parameter receives coordinates
+    expand_limits(x = states$long, y = states$lat) 
+
+
+```
